@@ -61,7 +61,6 @@ class Auto(Agent):
       self.localMatrix[10][6] = 0
     elif(self.entrada.pos == self.model.entradas[1].pos):
       self.localMatrix[15][9] = 0
-      #print(self.localMatrix)
     elif(self.entrada.pos == self.model.entradas[2].pos):
       self.localMatrix[6][10] = 0
     elif(self.entrada.pos == self.model.entradas[3].pos):
@@ -79,8 +78,6 @@ class Auto(Agent):
       pathGrid = PathGrid(matrix=self.localMatrix)
       
       if(self.roaming == False and self.salida != None):
-        
-        #print(self.endX)
         self.endX = self.salida.pos[0]
         self.endY = self.salida.pos[1]
         self.roaming = True
@@ -138,12 +135,11 @@ class Calle(Model):
   def __init__(self):
         super().__init__()
         
-        self.carN = 5
+        self.carN = 4
         self.salidas = []
         self.entradas = []
         self.posibilidades = None
         self.paso = 0
-        quinto = [Via(self, (13,3))]
         
         self.matrix = mat
         self.schedule = RandomActivation(self)
@@ -174,8 +170,8 @@ class Calle(Model):
             self.schedule.add(limite)
        
 
-        self.posibilidades = copy(self.entradas)
-        self.extras = np.append(quinto,self.posibilidades)
+        self.extras  = copy(self.entradas)
+        #self.extras = np.append(quinto,self.posibilidades)
         #self.extras = copy(self.posibilidades)
         for i in range(self.carN):
           i = random.randint(0, len(self.extras)-1)
@@ -184,10 +180,9 @@ class Calle(Model):
           self.grid.place_agent(auto, auto.pos)
           self.schedule.add(auto)
 
-        
-        
-        
-        
+        auto5 = Auto(self,self.entradas[2], (13,3))
+        self.grid.place_agent(auto5, (13,3))
+        self.schedule.add(auto5)
           
   def step(self):
       self.schedule.step()
