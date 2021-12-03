@@ -1,4 +1,0 @@
-Flask>=1.0.0
-cloudant==2.13.0
-mesa>=0.8.9
-pathfinding>=1.0.0

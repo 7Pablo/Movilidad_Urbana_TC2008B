@@ -1,5 +1,0 @@
----
-applications:
- - name: Movilidad-Urbana-Trafico
-   random-route: true
-   memory: 128M
